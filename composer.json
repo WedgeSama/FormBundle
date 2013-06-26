@@ -1,0 +1,41 @@
+{
+	"name" : "wedgesama/form-bundle",
+	"description" : "Symfony WSFormBundle",
+	"type" : "symfony-bundle",
+	"authors" : [{
+			"name" : "Benjamin Georgeault",
+			"email" : "wedgesama@gmail.com",
+			"homepage" : "https://github.com/WedgeSama"
+		}
+	],
+	"keywords" : [
+		"Form management",
+		"form",
+		"form extra",
+		"collection",
+		"form collection"
+	],
+	"homepage" : "https://github.com/WedgeSama",
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"php" : ">=5.3.3",
+		"symfony/framework-bundle" : "~2.3",
+		"genemu/form-bundle" : "2.2.*",
+		"symfony/form" : "~2.3",
+		"wedgesama/twig-extension-bundle" : "dev-master"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"WS\\FormBundle" : ""
+		}
+	},
+	"target-dir" : "WS/FormBundle",
+	"minimum-stability" : "dev",
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "master"
+		}
+	}
+}
