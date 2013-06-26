@@ -2,7 +2,7 @@ WSFormBundle Documentation
 ==================================
 
 ## Main
-- [Installation](index.md)
+- [Installation](install.md)
 - [Configuration](config.md)
 
 ## Usages
