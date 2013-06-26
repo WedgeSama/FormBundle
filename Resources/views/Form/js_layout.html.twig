@@ -59,3 +59,31 @@
 {% endspaceless %}
 {% endblock ws_collection_javascript %}
 
+
+{% block ws_collection_item_javascript %}
+{% spaceless %}
+    {{ form_javascript(form) }}
+    <script type="text/javascript">
+    
+    jQuery(document).ready(function($) {
+        var id = "{{ id }}";
+        var reg = new RegExp("_[0-9]+$", "g");
+        var idColl = id.replace(reg, "");
+
+        var ${{ id }}supprColl = $('#suppr-{{ id }}');
+
+        ${{ id }}supprColl.on('click', function(e) {
+            e.preventDefault();
+
+            var toDelete = '$' + idColl + 'toDelete';
+            var modal = '$' + idColl + 'modal';
+            
+            window[toDelete] = $('#{{ id }}');
+            window[modal].modal('show');
+        });
+    });
+    </script>
+
+
+{% endspaceless %}
+{% endblock ws_collection_item_javascript %}
