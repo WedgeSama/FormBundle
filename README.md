@@ -10,6 +10,8 @@ Documentation
 
 The index of the documentation is stored in the `Resources/doc/index.md`
 
+[Resources/doc/index.md](https://github.com/WedgeSama/WSFormBundle/blob/master/Resources/doc/index.md)
+
 License
 -------
 
