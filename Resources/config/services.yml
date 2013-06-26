@@ -1,0 +1,7 @@
+parameters:
+#    ws_form.example.class: WS\FormBundle\Example
+
+services:
+#    ws_form.example:
+#        class: %ws_form.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

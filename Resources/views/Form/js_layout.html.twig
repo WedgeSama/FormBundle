@@ -1,0 +1,61 @@
+{% block ws_collection_javascript %}
+{% spaceless %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    {% if translation_domain is empty %}
+        {% set translation_domain = "message" %}
+    {% endif %}
+    <script type="text/javascript">
+    var {{ id }}collectionHolder = $('#{{ id }}');
+    var ${{ id }}addCollLink = $('#add-{{ id }}');
+    var ${{ id }}supprCollLink = $('#modal_suppr_{{ id }}-valid');
+    var ${{ id }}modal = $('#modal_suppr_{{ id }}');
+    var ${{ id }}toDelete;
+    
+    jQuery(document).ready(function() {
+    	{{ id }}collectionHolder.data('index', {{ id }}collectionHolder.find("div[id^='{{ id }}_']").length);
+        
+    	${{ id }}addCollLink.on('click', function(e) {
+            e.preventDefault();
+            {{ id }}addCollForm();
+        });
+
+    	${{ id }}supprCollLink.on('click', function(e) {
+            e.preventDefault();
+            {{ id }}supprCollForm();
+        });
+    });
+
+    function {{ id }}addCollForm() {
+        var prototype = {{ id }}collectionHolder.attr('data-prototype');
+        var index = {{ id }}collectionHolder.data('index');
+        
+        var newForm = prototype.replace(/__name__label__/g, "__label__ __name__");
+        newForm = newForm.replace(/__label__/g, "{{ label|trans({}, translation_domain) }}");
+        newForm = newForm.replace(/__name__/g, index);
+        
+        {{ id }}collectionHolder.data('index', index + 1);
+        {{ id }}collectionHolder.append(newForm);
+
+        var $supprColl = $('#suppr-{{ id }}_' + index);
+        
+        $supprColl.on('click', function(e) {
+            e.preventDefault();
+            ${{ id }}toDelete = $('#{{ id }}_' + index);
+            ${{ id }}modal.modal('show');
+        });
+        
+    }
+
+    function {{ id }}supprCollForm(){
+        ${{ id }}toDelete.remove();
+        ${{ id }}modal.modal('hide');
+    }
+    
+    </script>
+
+
+{% endspaceless %}
+{% endblock ws_collection_javascript %}
+

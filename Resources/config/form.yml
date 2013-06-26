@@ -1,0 +1,10 @@
+services:
+    form.type.ws_collection:
+        class: WS\FormBundle\Form\Type\CollectionType
+        tags:
+            - { name: form.type, alias: ws_collection }
+
+    form.type.ws_collection_item:
+        class: WS\FormBundle\Form\Type\CollectionItemType
+        tags:
+            - { name: form.type, alias: ws_collection_item }

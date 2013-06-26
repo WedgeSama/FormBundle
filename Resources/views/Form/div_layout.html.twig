@@ -1,0 +1,40 @@
+
+{% block ws_collection_row %}
+{% spaceless %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    <div id="{{ id }}" data-prototype="{{ form_row(prototype)|replace('"', '"') }}">
+        <div class="control-group">
+            {{ form_widget(form) }}
+        </div>
+        {{ form_errors(form) }}
+    </div>
+{% endspaceless %}
+{% endblock ws_collection_row %}
+
+{% block ws_collection_widget %}
+{% spaceless %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+        <button type="button" id="add-{{ id }}" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> {{ label|trans({}, translation_domain) }}</button>
+        {{ ws_modal('modal_suppr_', id, "", 1, translation_modal, translation_domain, {'%entity%': label, '%object%': '__object__'}) }}
+        
+        {{ form_rest(form) }}
+{% endspaceless %}
+{% endblock ws_collection_widget %}
+
+
+{% block ws_collection_item_row %}
+{% spaceless %}
+	{% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+	<div id="{{ id }}">
+		<legend>{{ label|trans({}, translation_domain) }} <button type="button" id="suppr-{{ id }}" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i></button></legend>
+        {{ form_widget(form) }}
+    	{{ ws_add_js(form_javascript(form)) }}
+    </div>
+{% endspaceless %}
+{% endblock ws_collection_item_row %}
