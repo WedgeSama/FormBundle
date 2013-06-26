@@ -10,7 +10,7 @@ This bundle requires
 
 ## Installation
 
-### Step 1: Download WSUserBundle using composer
+### Step 1: Download WSFormBundle using composer
 
 Add WSFormBundle in your composer.json:
 
