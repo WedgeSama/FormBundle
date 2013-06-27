@@ -52,7 +52,6 @@ Add the following lines to your form view files:
 
 {{ form_javascript(form) }}
 {{ ws_js() }}
-
 ```
 
 ## Requires

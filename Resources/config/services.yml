@@ -1,7 +1,6 @@
 parameters:
-#    ws_form.example.class: WS\FormBundle\Example
 
 services:
-#    ws_form.example:
-#        class: %ws_form.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ws.services.persistecollection:
+        class: WS\FormBundle\Services\PersisteCollection
+        arguments: [ '@doctrine.orm.entity_manager' ]

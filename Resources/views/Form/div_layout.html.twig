@@ -5,9 +5,7 @@
         {% set label = name|humanize %}
     {% endif %}
     <div id="{{ id }}" data-prototype="{{ form_row(prototype)|replace('"', '"') }}">
-        <div class="control-group">
-            {{ form_widget(form) }}
-        </div>
+        {{ form_widget(form) }}
         {{ form_errors(form) }}
     </div>
 {% endspaceless %}
