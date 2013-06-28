@@ -95,23 +95,33 @@
     <script type="text/javascript">
     
     jQuery(document).ready(function() {
-    	var $closeButton = $('#close-add-{{ id }}');
     	var $select = $('#{{ form.vars.id }}');
-    	
-    	$closeButton.on('click', function(e) {
-            e.preventDefault();
-            
-            $.ajax({
+    	var $modal = $('#add-{{ id }}');
+    	var $modal_body = $('#modal-body-add-{{ id }}')
+
+    	$modal.on('hide', function () {
+    		$.ajax({
             	dataType: "json",
     			url: "{{ path(ajax_path, ajax_path_vars) }}",
     			success: function(data) {
+        				var $selected = $select.select2("data");
+        				
+        				$select.select2("val", "");
     					$select.html('');
-    
+    					
     					jQuery.each(data, function(i) {
     						$select.append('<option value="' + data[i].id + '">' + data[i].{{ property }} + '</select>');
     					});
+
+    					$select.select2("data", $selected);
     				}
         	});
+        });
+
+    	$modal.on('show', function () {
+    		var html = $modal_body.html();
+    		$modal_body.html('');
+    		$modal_body.append(html);
         });
     });
     

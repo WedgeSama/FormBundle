@@ -16,8 +16,12 @@
     {% if label is empty %}
         {% set label = name|humanize %}
     {% endif %}
-        <button type="button" id="add-{{ id }}" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> {{ label|trans({}, translation_domain) }}</button>
-        {{ ws_modal('modal_suppr_', id, "", 1, translation_modal, translation_domain, {'%entity%': label, '%object%': '__object__'}) }}
+    	<div class="control-group">
+        	<div class="controls">
+                <button type="button" id="add-{{ id }}" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> {{ label|trans({}, translation_domain) }}</button>
+                {{ ws_modal('modal_suppr_', id, "", 1, translation_modal, translation_domain, {'%entity%': label, '%object%': '__object__'}) }}
+            </div>
+        </div>
         
         {{ form_rest(form) }}
 {% endspaceless %}
