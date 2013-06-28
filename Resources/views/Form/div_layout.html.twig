@@ -36,3 +36,25 @@
     </div>
 {% endspaceless %}
 {% endblock ws_collection_item_row %}
+
+{% block ws_entity_add_row %}
+{% spaceless %}
+<div class="control-group">
+    {{ form_label(form) }}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    <div class="controls">
+        {{ form_widget(form) }}
+        
+        <span class="help-inline">
+        	<a href="#" class="btn btn-success btn-mini" data-toggle="modal"
+						data-target="#add-{{ id }}"><i class="icon-plus icon-white"></i> {{ label|trans({}, translation_domain) }}</a>
+			{{ ws_modal_iframe("add-", id, path(iframe_path, iframe_path_vars)) }}
+        </span>
+        
+        {{ form_errors(form) }}
+    </div>
+</div>
+{% endspaceless %}
+{% endblock ws_entity_add_row %}

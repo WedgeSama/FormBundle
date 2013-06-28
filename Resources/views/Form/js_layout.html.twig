@@ -87,3 +87,34 @@
 
 {% endspaceless %}
 {% endblock ws_collection_item_javascript %}
+
+
+{% block ws_entity_add_javascript %}
+{% spaceless %}
+	{{ form_javascript(form) }}
+    <script type="text/javascript">
+    
+    jQuery(document).ready(function() {
+    	var $closeButton = $('#close-add-{{ id }}');
+    	var $select = $('#{{ form.vars.id }}');
+    	
+    	$closeButton.on('click', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+            	dataType: "json",
+    			url: "{{ path(ajax_path, ajax_path_vars) }}",
+    			success: function(data) {
+    					$select.html('');
+    
+    					jQuery.each(data, function(i) {
+    						$select.append('<option value="' + data[i].id + '">' + data[i].{{ property }} + '</select>');
+    					});
+    				}
+        	});
+        });
+    });
+    
+    </script>
+{% endspaceless %}
+{% endblock ws_entity_add_javascript %}

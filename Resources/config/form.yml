@@ -8,3 +8,8 @@ services:
         class: WS\FormBundle\Form\Type\CollectionItemType
         tags:
             - { name: form.type, alias: ws_collection_item }
+            
+    form.type.ws_entity_add:
+        class: WS\FormBundle\Form\Type\EntityAddType
+        tags:
+            - { name: form.type, alias: ws_entity_add }
