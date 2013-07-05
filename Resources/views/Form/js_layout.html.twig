@@ -7,6 +7,7 @@
         {% set translation_domain = "message" %}
     {% endif %}
     <script type="text/javascript">
+    
     var {{ id }}collectionHolder = $('#{{ id }}');
     var ${{ id }}addCollLink = $('#add-{{ id }}');
     var ${{ id }}supprCollLink = $('#modal_suppr_{{ id }}-valid');
@@ -14,7 +15,7 @@
     var ${{ id }}toDelete;
     
     jQuery(document).ready(function() {
-    	{{ id }}collectionHolder.data('index', {{ id }}collectionHolder.find("div[id^='{{ id }}_']").length);
+    	{{ id }}collectionHolder.data('index', {{ id }}getNumber());
         
     	${{ id }}addCollLink.on('click', function(e) {
             e.preventDefault();
@@ -25,16 +26,30 @@
             e.preventDefault();
             {{ id }}supprCollForm();
         });
+
+    	{% if order %}
+    	var ${{ id }}formContent = $('#{{ id }} .formContent');
+    	$( "#{{ id }}" ).sortable({
+    		    revert: true,
+    		    handle: "legend",
+    		    start: function( event, ui ) {
+    		    	${{ id }}formContent.hide('clip');
+			    },
+			    stop: function( event, ui ) {
+			    	${{ id }}formContent.show('clip');
+			    	{{ id }}majNumbers();
+				}
+		});
+        {% endif %}
     });
 
     function {{ id }}addCollForm() {
         var prototype = {{ id }}collectionHolder.attr('data-prototype');
         var index = {{ id }}collectionHolder.data('index');
         
-        var newForm = prototype.replace(/__name__label__/g, "__label__ __name__");
-        newForm = newForm.replace(/__label__/g, "{{ label|trans({}, translation_domain) }}");
-        newForm = newForm.replace(/__name__/g, index);
-        
+        var newForm = prototype.replace(/{{ prototype_name }}label__/g, "{{ label|trans({}, translation_domain) }}");
+        newForm = newForm.replace(/{{ prototype_name }}/g, index);
+
         {{ id }}collectionHolder.data('index', index + 1);
         {{ id }}collectionHolder.append(newForm);
 
@@ -42,15 +57,33 @@
         
         $supprColl.on('click', function(e) {
             e.preventDefault();
-            ${{ id }}toDelete = $('#{{ id }}_' + index);
+            ${{ id }}toDelete = $('#block-{{ id }}_' + index);
             ${{ id }}modal.modal('show');
         });
-        
+
+        {{ id }}majNumbers();
     }
 
     function {{ id }}supprCollForm(){
         ${{ id }}toDelete.remove();
         ${{ id }}modal.modal('hide');
+        {{ id }}majNumbers();
+    }
+
+    function {{ id }}majNumbers() {
+        var $blocks = {{ id }}collectionHolder.find("div[id^='block-{{ id }}_']");
+
+        $blocks.each(function(index) {
+        	var id = $( this ).attr('id');
+            var $order = $('#' + id.replace(/^block-/g, "order-"));
+            $order.html(index + ' ');
+            var $order_input = $('#' + id.replace(/^block-/g, "") + '_order');
+            $order_input.attr('value', index);
+    	});
+    }
+
+    function {{ id }}getNumber() {
+        return {{ id }}collectionHolder.find("div[id^='block-{{ id }}_']").length;
     }
     
     </script>
@@ -78,13 +111,11 @@
             var toDelete = '$' + idColl + 'toDelete';
             var modal = '$' + idColl + 'modal';
             
-            window[toDelete] = $('#{{ id }}');
+            window[toDelete] = $('#block-{{ id }}');
             window[modal].modal('show');
         });
     });
     </script>
-
-
 {% endspaceless %}
 {% endblock ws_collection_item_javascript %}
 

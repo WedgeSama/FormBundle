@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace WS\FormBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -19,27 +18,33 @@ use Symfony\Component\Form\FormInterface;
 
 class CollectionType extends AbstractType {
 
-	public function buildView(FormView $view, FormInterface $form, array $options) {
-		$view->vars['translation_modal'] = $options['translation_modal'];
-	}
+    public function buildView(FormView $view, FormInterface $form, 
+        array $options) {
+        $view->vars['translation_modal'] = $options['translation_modal'];
+        $view->vars['prototype_name'] = $options['prototype_name'];
+        $view->vars['order'] = $options['order'];
+    }
 
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults(array (
-				'allow_add' => true,
-				'allow_delete' => true,
-				'prototype' => true,
-				'by_reference' => false,
-				'translation_modal' => 'modal.suppr',
-				'translation_domain' => 'WSTwigExtensionBundle' 
-		));
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults(
+                array(
+                        'allow_add' => true, 
+                        'allow_delete' => true, 
+                        'prototype' => true, 
+                        'by_reference' => false, 
+                        'translation_modal' => 'modal.suppr', 
+                        'translation_domain' => 'WSTwigExtensionBundle', 
+                        'prototype_name' => '__name__',
+                        'order' => false
+                ));
+    }
 
-	public function getName() {
-		return 'ws_collection';
-	}
+    public function getName() {
+        return 'ws_collection';
+    }
 
-	public function getParent() {
-		return 'collection';
-	}
+    public function getParent() {
+        return 'collection';
+    }
 
 }

@@ -27,44 +27,54 @@
 {% endspaceless %}
 {% endblock asterisk %}
 
+
+{% block ws_collection_label %}
+{% spaceless %}
+    <div class="control-group">
+    	<div class="controls">
+            <button type="button" id="add-{{ id }}" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> {{ label|trans({}, translation_domain) }}</button>
+            {{ ws_modal('modal_suppr_', id, "", 1, translation_modal, translation_domain, {'%entity%': label, '%object%': '__object__'}) }}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock ws_collection_label %}
+
+
 {% block ws_collection_row %}
 {% spaceless %}
     {% if label is empty %}
         {% set label = name|humanize %}
     {% endif %}
-    <div id="{{ id }}" data-prototype="{{ form_row(prototype)|replace('"', '"') }}">
-        {{ form_widget(form) }}
-        {{ form_errors(form) }}
-    </div>
+    {{ form_label(form) }}
+    {{ form_widget(form) }}
+    {{ form_errors(form) }}
 {% endspaceless %}
 {% endblock ws_collection_row %}
 
-{% block ws_collection_widget %}
+{% block ws_collection_item_label %}
 {% spaceless %}
-    {% if label is empty %}
-        {% set label = name|humanize %}
-    {% endif %}
-    	<div class="control-group">
-        	<div class="controls">
-                <button type="button" id="add-{{ id }}" class="btn btn-success btn-mini"><i class="icon-plus icon-white"></i> {{ label|trans({}, translation_domain) }}</button>
-                {{ ws_modal('modal_suppr_', id, "", 1, translation_modal, translation_domain, {'%entity%': label, '%object%': '__object__'}) }}
-            </div>
-        </div>
-        
-        {{ form_rest(form) }}
+    <legend>
+        {{ label|trans({}, translation_domain) }}
+        <span id="order-{{ id }}"> {{ name }} </span>
+        <button type="button" id="suppr-{{ id }}" class="btn btn-danger btn-mini">
+            <i class="icon-remove icon-white"></i>
+        </button>
+    </legend>
 {% endspaceless %}
-{% endblock ws_collection_widget %}
-
+{% endblock ws_collection_item_label %}
 
 {% block ws_collection_item_row %}
 {% spaceless %}
-	{% if label is empty %}
-        {% set label = name|humanize %}
-    {% endif %}
-	<div id="{{ id }}">
-		<legend>{{ label|trans({}, translation_domain) }} <button type="button" id="suppr-{{ id }}" class="btn btn-danger btn-mini"><i class="icon-remove icon-white"></i></button></legend>
-        {{ form_widget(form) }}
-    	{{ ws_add_js(form_javascript(form)) }}
+	<div id="block-{{ id }}">
+		{{ form_label(form) }}
+		<div class="formContent">
+            {{ form_widget(form) }}
+        </div>
+        {% if name is not numeric %}
+            {{ form_javascript(form) }}
+        {% else %}
+            {{ ws_add_js(form_javascript(form)) }}
+        {% endif %}
     </div>
 {% endspaceless %}
 {% endblock ws_collection_item_row %}
