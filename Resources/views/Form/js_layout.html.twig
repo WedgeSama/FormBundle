@@ -28,15 +28,14 @@
         });
 
     	{% if order %}
-    	var ${{ id }}formContent = $('#{{ id }} .formContent');
     	$( "#{{ id }}" ).sortable({
     		    revert: true,
-    		    handle: "legend",
+    		    handle: "{{ handler }}",
     		    start: function( event, ui ) {
-    		    	${{ id }}formContent.hide('clip');
+    		    	$('#{{ id }} .formContent').hide('clip');
 			    },
 			    stop: function( event, ui ) {
-			    	${{ id }}formContent.show('clip');
+			    	$('#{{ id }} .formContent').show('clip');
 			    	{{ id }}majNumbers();
 				}
 		});

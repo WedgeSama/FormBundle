@@ -23,6 +23,7 @@ class CollectionType extends AbstractType {
         $view->vars['translation_modal'] = $options['translation_modal'];
         $view->vars['prototype_name'] = $options['prototype_name'];
         $view->vars['order'] = $options['order'];
+        $view->vars['handler'] = $options['handler'];
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
@@ -35,7 +36,8 @@ class CollectionType extends AbstractType {
                         'translation_modal' => 'modal.suppr', 
                         'translation_domain' => 'WSTwigExtensionBundle', 
                         'prototype_name' => '__name__',
-                        'order' => false
+                        'order' => false,
+                        'handler' => 'legend'
                 ));
     }
 
