@@ -40,6 +40,8 @@
 				}
 		});
         {% endif %}
+
+        {{ id }}majNumbers();
     });
 
     function {{ id }}addCollForm() {
@@ -76,7 +78,7 @@
         	var id = $( this ).attr('id');
             var $order = $('#' + id.replace(/^block-/g, "order-"));
             $order.html(index + ' ');
-            var $order_input = $('#' + id.replace(/^block-/g, "") + '_order');
+            var $order_input = $('#' + id.replace(/^block-/g, "") + '_orderItem');
             $order_input.attr('value', index);
     	});
     }
